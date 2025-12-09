@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARTifacts — Welcome</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, #fafafa, #eaeaea);
+  font-family: Arial, sans-serif;
+}
+
+.intro-container {
+  text-align: center;
+}
+
+/* Blob + logo wrapper */
+.blob-wrapper {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto;
+}
+
+/* Animated blob */
+.blob {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 10px 10px 25px rgba(0,0,0,0.15), -10px -10px 25px rgba(255,255,255,0.9);
+  animation: morph 6s ease-in-out infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+@keyframes morph {
+  0% { border-radius: 55% 45% 60% 40% / 60% 50% 55% 45%; }
+  50% { border-radius: 45% 55% 40% 60% / 45% 55% 40% 60%; }
+  100% { border-radius: 55% 45% 60% 40% / 60% 50% 55% 45%; }
+}
+
+/* Logo inside blob - bigger */
+.intro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;      /* Increased size */
+  height: 300px;     /* Increased size */
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Text below blob */
+h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-top: 30px;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 25px;
+}
+
+.enter-btn {
+  padding: 12px 20px;
+  background: #fff;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.15), -4px -4px 10px rgba(255,255,255,0.8);
+  transition: 0.2s ease;
+}
+
+.enter-btn:hover {
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+
+<div class="intro-container">
+  <div class="blob-wrapper">
+    <div class="blob"></div>
+    <img src="assets/logo.png" alt="Logo" class="intro-logo">
+  </div>
+
+  <h1>ARTifacts</h1>
+  <p>Augmented Reality Art Experience</p>
+
+  <a href="login.html" class="enter-btn">Enter</a>
+</div>
+
+</body>
+</html>

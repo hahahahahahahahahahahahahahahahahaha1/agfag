@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Upload Artworks & 3D Models — ARTifacts</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="top-bar">
+  <a href="home.html" class="back-btn">← Back</a>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<h1>Manage Artworks & 3D Models</h1>
+
+<div class="upload-container">
+
+  <!-- 2D Artwork -->
+  <label>Upload Artwork Image</label>
+  <input type="file" id="artInput" accept="image/*">
+  <label>Artwork Title</label>
+  <input type="text" id="artTitle" placeholder="Enter artwork title">
+  <label>Description</label>
+  <textarea id="artDesc" rows="3" placeholder="Short description"></textarea>
+  <button onclick="addArtwork()">Add Artwork</button>
+
+  <hr style="margin:20px 0;">
+
+  <!-- 3D Model -->
+  <label>Upload 3D Model (.gltf / .glb)</label>
+  <input type="file" id="modelInput" accept=".gltf,.glb">
+  <label>3D Model Title</label>
+  <input type="text" id="modelTitle" placeholder="Enter model title">
+  <label>3D Model Description</label>
+  <textarea id="modelDesc" rows="2" placeholder="Short description"></textarea>
+  <button onclick="uploadModel()">Upload 3D Model</button>
+
+  <h2>Your Artworks & Models</h2>
+  <div id="artList"></div>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+if (!localStorage.getItem("currentUser")) {
+  window.location.href = "login.html";
+}
+
+displayArtworks();
+
+function logout() {
+  localStorage.removeItem("currentUser");
+  window.location.href = "login.html";
+}
+
+function uploadModel() {
+  const file = document.getElementById("modelInput").files[0];
+  const title = document.getElementById("modelTitle").value.trim();
+  const desc = document.getElementById("modelDesc").value.trim();
+
+  if (!file) return alert("Please select a GLTF/GLB file!");
+  if (!title) return alert("Enter model title!");
+
+  const url = URL.createObjectURL(file);
+
+  updateArtistData(artist => {
+    if (!artist.models) artist.models = [];
+    artist.models.push({
+      name: file.name,
+      url: url,
+      title: title,
+      desc: desc
+    });
+  });
+
+  alert("3D model uploaded successfully!");
+  document.getElementById("modelInput").value = "";
+  document.getElementById("modelTitle").value = "";
+  document.getElementById("modelDesc").value = "";
+
+  displayArtworks();
+}
+</script>
+
+</body>
+</html>
